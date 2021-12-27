@@ -12,8 +12,8 @@ FLAG   += -Wall -Werror -Wfatal-errors -pedantic
 LINK 	= -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 
 
-INCLUDES 	= 	Makefile Window.h Clock.h
-OBJS 		= 	main.o Window.o Clock.o
+INCLUDES 	= 	Makefile Window.h Clock.h Mouse.h
+OBJS 		= 	main.o Window.o Clock.o Mouse.o
 BIN 		= 	main
 
 ##################################################

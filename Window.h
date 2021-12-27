@@ -32,8 +32,8 @@ public:
     inline  int         clear           ()  { return SDL_RenderClear(renderer_);    };
     inline  void        present         ()  { SDL_RenderPresent(renderer_);         };
     
-    inline const  SDL_Window*   getWindow   ()  { return window_;   }
-    inline const  SDL_Renderer* getRenderer ()  { return renderer_; }
+    inline   SDL_Window*   getWindow   ()  { return window_;   }
+    inline   SDL_Renderer* getRenderer ()  { return renderer_; }
 
     inline void stop () { running_ = false; }
 
