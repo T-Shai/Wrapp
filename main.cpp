@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Clock.h"
 #include "Mouse.h"
+#include "Shape.h"
 
 class MyWindow: public Window
 {
@@ -13,6 +14,14 @@ class MyWindow: public Window
   public:
 
     using Window::Window;
+    Shape::Rect* r;    
+
+    void onRun() override
+    {
+      r = new Shape::Rect();
+      r->setHeight(50);
+      r->setWidth(100);
+    }
 
     void onRender () override
     {
@@ -20,21 +29,25 @@ class MyWindow: public Window
       clear();
       std::cout << "FPS : " << Clock::getFPS() << std::endl;
       std::cout << "delta : " << Clock::tick(60*2) << std::endl;
-      SDL_Rect r;
+      // SDL_Rect r;
       
-      r.x = Mouse::getX();
-      r.y = Mouse::getY();
+      // r.x = Mouse::getX();
+      // r.y = Mouse::getY();
 
-      SDL_GetWindowSize(getWindow(), &r.w, &r.h);
-      r.w /= 16;
-      r.h /= 16;
+      r->setX(Mouse::getX());
+      r->setY(Mouse::getY());
 
-      if(Mouse::isLeft()) setDrawColor(255, 0, 0, 0);
-      else if (Mouse::isMiddle()) setDrawColor(0, 255, 0, 0);
-      else if (Mouse::isRight()) setDrawColor(0, 0, 255, 0);
-      else setDrawColor(255, 255, 255, 0);
+      if(Mouse::isLeft()) r->setColor(255, 0, 0, 0);
+      else if (Mouse::isMiddle()) r->setColor(0, 255, 0, 0);
+      else if (Mouse::isRight()) r->setColor(0, 0, 255, 0);
+      else r->setColor(255, 255, 255, 0);
       
-      SDL_RenderFillRect(getRenderer(), &r);
+      SDL_Color c = r->getColor();
+
+      setDrawColor(c.r, c.g, c.b, c.a);
+
+      SDL_Rect re = r->getRect();
+      SDL_RenderFillRect(getRenderer(), &re);
       present();
     }
 

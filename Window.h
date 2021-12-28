@@ -37,7 +37,7 @@ public:
 
     inline void stop () { running_ = false; }
 
-    void onRun()  {};
+    virtual void onRun()  {};
     void onExit() {};
     /*  
     * \param event SDL_Event to process
