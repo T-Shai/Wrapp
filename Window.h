@@ -26,8 +26,6 @@ public:
     Window(const char* title, int x, int y, int w, int h, Uint32 winflags, int index, Uint32 rendflags);
     virtual ~Window();
 
-    inline  int         setDrawColor    (Uint8 r, Uint8 g, Uint8 b, Uint8 a)  
-    { return SDL_SetRenderDrawColor(renderer_, r, g, b, a);}
     
     inline  int         clear           ()  { return SDL_RenderClear(renderer_);    };
     inline  void        present         ()  { SDL_RenderPresent(renderer_);         };
@@ -37,8 +35,8 @@ public:
 
     inline void stop () { running_ = false; }
 
-    virtual void onRun()  {};
-    void onExit() {};
+    virtual void onInit()   {};
+    virtual void onExit()   {};
     /*  
     * \param event SDL_Event to process
     */
@@ -48,4 +46,11 @@ public:
     void mainLoop();
 
     void run();
+
+
+    inline  int         setDrawColor    (Uint8 r, Uint8 g, Uint8 b, Uint8 a)  
+    { return SDL_SetRenderDrawColor(renderer_, r, g, b, a);}
+
+    inline void showCursor(bool toggle) {SDL_ShowCursor(toggle?SDL_ENABLE:SDL_DISABLE);}
+    inline bool isCursorShown()         {return SDL_ShowCursor(SDL_QUERY)==SDL_ENABLE;}
 };

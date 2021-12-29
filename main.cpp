@@ -16,7 +16,7 @@ class MyWindow: public Window
     using Window::Window;
     Shape::Rect* r;    
 
-    void onRun() override
+    void onInit() override
     {
       r = new Shape::Rect();
       r->setHeight(50);
@@ -42,12 +42,11 @@ class MyWindow: public Window
       else if (Mouse::isRight()) r->setColor(0, 0, 255, 0);
       else r->setColor(255, 255, 255, 0);
       
-      SDL_Color c = r->getColor();
+      r->draw(*this);
+      r->scale(-50, -25);
+      r->drawFill(*this);
+      r->scale(50, 25);
 
-      setDrawColor(c.r, c.g, c.b, c.a);
-
-      SDL_Rect re = r->getRect();
-      SDL_RenderFillRect(getRenderer(), &re);
       present();
     }
 
@@ -79,6 +78,7 @@ int main(int argc, char *argv[])
                     WIDTH, HEIGHT,
                     SDL_WINDOW_ALLOW_HIGHDPI,
                     -1, 0);
+    w.showCursor(false);
     w.run();
     SDL_Quit();
     return 0;

@@ -51,7 +51,7 @@ void Window::mainLoop()
 }
 void Window::run()
 {
-    onRun();
+    onInit();
     running_ = true;
     mainLoop();
     onExit();
