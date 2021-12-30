@@ -1,6 +1,5 @@
 #include "stdio.h"
 #include "SDL2/SDL.h"
-
 #include <iostream>
 
 #include "Window.h"
@@ -14,13 +13,17 @@ class MyWindow: public Window
   public:
 
     using Window::Window;
-    Shape::Rect* r;    
+    Shape::Rect* r;
+    Shape::Circle* c;    
 
     void onInit() override
     {
       r = new Shape::Rect();
       r->setHeight(50);
       r->setWidth(100);
+
+      c = new Shape::Circle();
+      c->setRadius(20);
     }
 
     void onRender () override
@@ -47,6 +50,10 @@ class MyWindow: public Window
       r->drawFill(*this);
       r->scale(50, 25);
 
+      c->setCenter(Mouse::getX(), Mouse::getY());
+      c->setColor(Mouse::getX()%255, Mouse::getY()%255, 100, 0);
+      c->drawFill(*this);
+
       present();
     }
 
@@ -66,7 +73,7 @@ void assert_ltz(int code, const char* funcname)
   }
 }
 
-const int WIDTH = 800, HEIGHT = 600;
+const int WIDTH = 1200, HEIGHT = 800;
 
 int main(int argc, char *argv[])
 {

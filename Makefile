@@ -18,10 +18,10 @@ BIN 		= 	main
 
 ##################################################
 
-run : $(BIN)
+run : $(BIN) $(INCLUDES)
 	./$(BIN)
 
-$(BIN) : $(OBJS) 
+$(BIN) : $(OBJS) $(INCLUDES)
 	$(CC) $(FLAG) $(OBJS) $(LINK) -o $(BIN)
 
 %.o : %.cpp $(INCLUDES)
